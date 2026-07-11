@@ -7,11 +7,11 @@ app.get('/', (req, res) => {
   console.log("test");
 })
 
-app.post('/',(req, res) => {
+app.post('/webhook',(req, res) => {
         res.send("POST Request Called");
 });
 
-app.post('/', express.json({type: 'application/json'}), (request, response) => {
+app.post('/webhook', express.json({type: 'application/json'}), (request, response) => {
 
   // Respond to indicate that the delivery was successfully received.
   // Your server should respond with a 2XX response within 10 seconds of receiving a webhook delivery. If your server takes longer than that to respond, then GitHub terminates the connection and considers the delivery a failure.
