@@ -1,23 +1,28 @@
-const express = require('express')
-const app = express()
-const port = 3000
+const express = require('express');
+const app = express();
+const port = 3000;
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-  console.log("test");
-})
+app.post('/webhook', async (req, res) => {
+  try {
+    const webhookData = req.body;
 
-app.post('/webhook',(req, res) => {
-        res.send("POST Request Called");
+    await processWebhookData(webhookData);
+
+    res.sendStatus(200);
+  } catch (error) {
+    console.error(`Error: ${error}`);
+    res.sendStatus(500);
+  }
 });
 
-app.post('/webhook', express.json({type: 'application/json'}), (request, response) => {
-
-  // Respond to indicate that the delivery was successfully received.
-  // Your server should respond with a 2XX response within 10 seconds of receiving a webhook delivery. If your server takes longer than that to respond, then GitHub terminates the connection and considers the delivery a failure.
-  response.status(202).send('Accepted');
-  console.log("Webhook Found!");
-});
+async function processWebhookData(data) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      console.log('Webhook data: ', data);
+      resolve();
+    }, 2000);
+  });
+}
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
