@@ -6,17 +6,19 @@ const bodyParser = require("body-parser");
 
 
 app.use(express.json());
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 app.post('/webhook', async (req, res) => {
     try {
-        const webhookData = req;
+        const webhookData = req.body;
 
         // Simulate some async processing
         await processWebhookData(webhookData);
 
         // Send a 200 status code response
-        res.sendStatus(200);
+        res.status(200).json({ data: data, message: 'Data received successfully' });
     } catch (error) {
         console.error(`Error: ${error}`);
         res.sendStatus(500);
