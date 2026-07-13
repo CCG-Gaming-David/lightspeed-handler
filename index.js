@@ -4,7 +4,7 @@ app.use(express.json());
 
 app.post('/webhook', async (req, res) => {
     try {
-        const webhookData = req;
+        const webhookData = req.body;
 
         // Simulate some async processing
         await processWebhookData(webhookData);
