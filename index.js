@@ -1,21 +1,20 @@
-// then in your app
-var express = require('express')
-var bodyParser = require('body-parser')
- 
-var app = express()
- 
-// create application/json parser
-var jsonParser = bodyParser.json()
- 
-// create application/x-www-form-urlencoded parser
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
- 
-// POST /login gets urlencoded bodies
-app.post('/login', urlencodedParser, function (req, res) {
-  res.send('welcome, ' + req.body.username)
-})
- 
-// POST /api/users gets JSON bodies
-app.post('/api/users', jsonParser, function (req, res) {
-  // create user in req.body
-})
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Middleware to parse JSON
+app.use(bodyParser.json());
+
+// Webhook endpoint
+app.post('/webhook', (req, res) => {
+  console.log('📩 Webhook received:', req.body);
+
+  // Always reply with 200 OK so the sender knows you got it
+  res.status(200).send('Webhook received');
+});
+
+app.listen(PORT, () => {
+  console.log(`🚀 Server is running on http://localhost:${PORT}`);
+});
