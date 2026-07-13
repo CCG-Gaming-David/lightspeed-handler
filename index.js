@@ -1,6 +1,9 @@
 // https://docs.github.com/en/apps/creating-github-apps/writing-code-for-a-github-app/building-a-github-app-that-responds-to-webhook-events
 // !!!TODO: Go through GitHub tutorial to setup receiving webhooks
 
+// https://docs.github.com/en/webhooks/using-webhooks/handling-webhook-deliveries
+// !!! TODO: Basic webhook tutorial GitHub
+
 // You installed the `express` library earlier. For more information, see [JavaScript example: Install dependencies](#javascript-example-install-dependencies).
 const express = require('express');
 
@@ -15,7 +18,9 @@ app.post('/webhook', express.json({type: 'application/json'}), (request, respons
   // Respond to indicate that the delivery was successfully received.
   // Your server should respond with a 2XX response within 10 seconds of receiving a webhook delivery. If your server takes longer than that to respond, then GitHub terminates the connection and considers the delivery a failure.
   response.status(202).send('Accepted');
-
+  
+  const data = request.body;
+  console.log("Webhook Data: " + data);
   // Check the `x-github-event` header to learn what event type was sent.
   const githubEvent = request.headers['x-github-event'];
 
