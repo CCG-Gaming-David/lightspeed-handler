@@ -20,11 +20,7 @@ app.post('/webhook', express.json({type: 'application/x-www-form-urlencoded'}), 
   // Your server should respond with a 2XX response within 10 seconds of receiving a webhook delivery. If your server takes longer than that to respond, then GitHub terminates the connection and considers the delivery a failure.
   response.status(202).send('Accepted');
 
-  let localData = {};
-  const incomingData = request.body;
-
-  localData['data'] = incomingData;
-  console.log(JSON.stringify(localData, null, 2));
+  console.log(request.body);
   // Check the `x-github-event` header to learn what event type was sent.
   const githubEvent = request.headers['x-github-event'];
 
