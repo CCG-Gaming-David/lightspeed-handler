@@ -3,6 +3,7 @@
 
 // https://docs.github.com/en/webhooks/using-webhooks/handling-webhook-deliveries
 // !!! TODO: Basic webhook tutorial GitHub
+//https://x-series-api.lightspeedhq.com/docs/webhooks
 
 // You installed the `express` library earlier. For more information, see [JavaScript example: Install dependencies](#javascript-example-install-dependencies).
 const express = require('express');
@@ -20,7 +21,7 @@ app.post('/webhook', express.json({type: 'application/json'}), (request, respons
   response.status(202).send('Accepted');
 
   const data = request.body;
-  console.log("Webhook Data: " + data.action);
+  console.log("Webhook Data: " + data);
   // Check the `x-github-event` header to learn what event type was sent.
   const githubEvent = request.headers['x-github-event'];
 
