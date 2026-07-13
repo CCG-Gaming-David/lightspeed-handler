@@ -5,7 +5,7 @@ const app = express();
 var jsonParser = bodyParser.json()
  
 // create application/x-www-form-urlencoded parser
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
+var urlencodedParser = bodyParser.urlencoded({ extended: true })
  
 
 app.post('/webhook', async (req, res) => {
