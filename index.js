@@ -1,12 +1,20 @@
-const express = require('express');
-const bodyParser = require('body-parser');
+const express = require("express");
 const app = express();
-// create application/json parser
-var jsonParser = bodyParser.json()
- 
-// create application/x-www-form-urlencoded parser
-var urlencodedParser = bodyParser.urlencoded({ extended: true })
- 
+const bodyParser = require("body-parser");
+
+
+
+const cors = require('cors');
+const corsOptions = {
+    origin: '*',
+    credentials: true,
+    optionSuccessStatus: 200
+}
+app.use(cors(corsOptions));
+
+
+app.use(express.json());
+app.use(bodyParser.json());
 
 app.post('/webhook', async (req, res) => {
     try {
