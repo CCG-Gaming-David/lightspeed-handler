@@ -1,8 +1,5 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const app = express();
-const port = 3000;
-
 app.use(express.json());
 
 app.post('/webhook', async (req, res) => {
@@ -31,6 +28,4 @@ async function processWebhookData(data) {
     });
 }
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-});
+app.listen(3000, () => console.log('Server is listening on port 3000'));
