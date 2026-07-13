@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({
 
 app.post('/webhook', async (req, res) => {
     try {
-        const webhookData = req.body.ref;
+        const webhookData = req.body.payload.ref;
 
         // Simulate some async processing
         await processWebhookData(webhookData);
