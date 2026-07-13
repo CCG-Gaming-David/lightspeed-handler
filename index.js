@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 
 app.post('/webhook', async (req, res) => {
     try {
-        const webhookData = req.body;
+        const webhookData = req;
 
         // Simulate some async processing
         await processWebhookData(webhookData);
