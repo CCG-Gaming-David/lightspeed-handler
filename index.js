@@ -1,20 +1,37 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-
+const express = require("express");
 const app = express();
-const PORT = process.env.PORT || 3000;
+const bodyParser = require("body-parser");
 
-// Middleware to parse JSON
+
+
+
+app.use(express.json());
 app.use(bodyParser.json());
 
-// Webhook endpoint
-app.post('/webhook', (req, res) => {
-  console.log('📩 Webhook received:', req.body);
+app.post('/webhook', async (req, res) => {
+    try {
+        const webhookData = req.body;
 
-  // Always reply with 200 OK so the sender knows you got it
-  res.status(200).send('Webhook received');
+        // Simulate some async processing
+        await processWebhookData(webhookData);
+
+        // Send a 200 status code response
+        res.sendStatus(200);
+    } catch (error) {
+        console.error(`Error: ${error}`);
+        res.sendStatus(500);
+    }
 });
 
-app.listen(PORT, () => {
-  console.log(`🚀 Server is running on http://localhost:${PORT}`);
-});
+async function processWebhookData(data) {
+    // This function simulates some asynchronous processing of the data
+    // In a real-world scenario, this could be saving data to a database, calling an API, etc.
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log('Webhook data:', data);
+            resolve();
+        }, 2000);
+    });
+}
+
+app.listen(3000, () => console.log('Server is listening on port 3000'));
