@@ -21,7 +21,7 @@ app.post('/webhook', express.json({type: 'application/json'}), (request, respons
   response.status(202).send('Accepted');
 
   const data = request.body;
-  console.log("Webhook Data: " + data);
+  console.log("Webhook Data: " + Object.prototype.toString.call(data));
   // Check the `x-github-event` header to learn what event type was sent.
   const githubEvent = request.headers['x-github-event'];
 
