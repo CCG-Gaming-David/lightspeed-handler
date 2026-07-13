@@ -18,7 +18,7 @@ app.post('/webhook', async (req, res) => {
         await processWebhookData(webhookData);
 
         // Send a 200 status code response
-        res.status(200).json({ data: data, message: 'Data received successfully' });
+        res.status(200);
     } catch (error) {
         console.error(`Error: ${error}`);
         res.sendStatus(500);
